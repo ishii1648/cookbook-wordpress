@@ -1,0 +1,4 @@
+-- 新規ユーザの作成
+CREATE USER '<%= node["wordpress"]["db"]["user"] %>'@'localhost' IDENTIFIED BY '<%= node["wordpress"]["db"]["pass"] %>';
+-- 権限の付与
+GRANT ALL PRIVILEGES ON `<%= node['wordpress']['db']['name'] %>`.* TO '<%= node["wordpress"]["db"]["user"] %>'@'localhost';
