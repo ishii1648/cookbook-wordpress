@@ -22,6 +22,13 @@ if is_local_host? db['host']
     action [:create, :start]
   end
 
+  socket = "/var/run/mysql-#{db['instance_name']}/mysqld.sock"
+
+  link '/var/lib/mysql/mysql.sock' do
+    to socket
+    not_if 'test -f /var/lib/mysql/mysql.sock'
+  end
+
   template 'my.conf' do
     path   '/etc/my.cnf.d/my.conf'
     source 'my.conf.erb'
